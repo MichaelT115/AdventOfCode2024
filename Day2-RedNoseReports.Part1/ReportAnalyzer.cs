@@ -22,9 +22,9 @@ public static class ReportAnalyzer
 
     public static bool IsSafe(ReadOnlySpan<char> report, bool allowRemovals = false)
     {
-        var values = ParseReportIntoLevels(report);
+        var values = ParseReportIntoLevels(report).AsSpan();
 
-        return IsSafe(values[0], values.AsSpan()[1..], allowRemovals);
+        return IsSafe(values[0], values[1..], allowRemovals);
     }
 
     private static int[] ParseReportIntoLevels(ReadOnlySpan<char> report)
@@ -67,20 +67,18 @@ public static class ReportAnalyzer
             var currentLevel = reportValues[index];
             if (IsGoodLevel(previousLevel, currentLevel, isAscending)) continue;
 
-            if (allowRemoval)
+            if (!allowRemoval) return false;
+            
+            if (index == 1)
             {
-                if (index == 1)
-                {
-                    return IsSafe(firstLevel, reportValues[index..], false) ||
-                           IsSafe(previousLevel, reportValues[(index + 1)..], isAscending, false);
-                }
-
-                return IsSafe(reportValues[index - 2], reportValues[index..], isAscending,
-                           false) ||
+                return IsSafe(firstLevel, reportValues[index..], false) ||
                        IsSafe(previousLevel, reportValues[(index + 1)..], isAscending, false);
             }
 
-            return false;
+            return IsSafe(reportValues[index - 2], reportValues[index..], isAscending,
+                       false) ||
+                   IsSafe(previousLevel, reportValues[(index + 1)..], isAscending, false);
+
         }
 
         return true;
