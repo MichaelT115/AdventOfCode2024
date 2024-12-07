@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day1-HistorianHysteria", "Day1-HistorianHysteria", "{DF1E5804-DA04-4A81-B696-1DB7FC82A221}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day1-HistorianHysteria.Part1", "Day1-HistorianHysteria\Day1-HistorianHysteria.Part1\Day1-HistorianHysteria.Part1.csproj", "{9499AA36-E566-4E47-9154-ECBDDD236572}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day1-HistorianHysteria.Tests", "Day1-HistorianHysteria\Day1-HistorianHysteria.Tests\Day1-HistorianHysteria.Tests.csproj", "{5CE34720-021B-4FBB-B51A-6551677F9814}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9499AA36-E566-4E47-9154-ECBDDD236572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9499AA36-E566-4E47-9154-ECBDDD236572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9499AA36-E566-4E47-9154-ECBDDD236572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9499AA36-E566-4E47-9154-ECBDDD236572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CE34720-021B-4FBB-B51A-6551677F9814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CE34720-021B-4FBB-B51A-6551677F9814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CE34720-021B-4FBB-B51A-6551677F9814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CE34720-021B-4FBB-B51A-6551677F9814}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9499AA36-E566-4E47-9154-ECBDDD236572} = {DF1E5804-DA04-4A81-B696-1DB7FC82A221}
+		{5CE34720-021B-4FBB-B51A-6551677F9814} = {DF1E5804-DA04-4A81-B696-1DB7FC82A221}
+	EndGlobalSection
+EndGlobal
