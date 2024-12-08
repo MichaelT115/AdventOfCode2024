@@ -2,12 +2,14 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=402EBC65_002D56D1_002D44CA_002DBE17_002D0B219C433813/@EntryIndexedValue">Day3-MullItOver.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=413BBA55_002D84FC_002D4A4C_002D85A6_002D8075DDC08EF0/@EntryIndexedValue">Day2-RedNoseReports.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=9499AA36_002DE566_002D4E47_002D9154_002DECBDDD236572/@EntryIndexedValue">5CE34720-021B-4FBB-B51A-6551677F9814</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=D2C47CB3_002D5321_002D47A3_002D9C80_002D4A4F9B2C304B/@EntryIndexedValue">Day4-CeresSearch.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=MSTest/@EntryIndexedValue">d6790ab7-33c2-4425-b2c9-51480cd1a852</s:String>
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/ShowAdvancedOptions/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=NUnit3x/@EntryIndexedValue">db4927dd-2e12-48a7-9a84-2b7e3e31b9c8</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4dfc92ed_002D5684_002D4334_002Dad49_002D6d3f5b6762fc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Day3-MullItOver&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\MTCoo\AdventOfCode2024" Presentation="&amp;lt;Day3-MullItOver&amp;gt;" /&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5b448885_002Decc6_002D434f_002D838a_002D20f074de0b9f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Day4-CeresSearch&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\MTCoo\AdventOfCode2024" Presentation="&amp;lt;Day4-CeresSearch&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	
