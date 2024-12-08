@@ -29,7 +29,7 @@ public class WordSearchSolverTests
               """, 2)]
     public void Forward_Horizontal_XMAS_Is_Counted(string input, int expected) =>
         Assert.That(WordSearchSolver.Solve(input), Is.EqualTo(expected));
-    
+
     [TestCase("SAMX", 1)]
     [TestCase("SAMXSAMX", 2)]
     [TestCase("SAMX.SAMX", 2)]
@@ -42,7 +42,7 @@ public class WordSearchSolverTests
               """, 2)]
     public void Backwards_Horizontal_XMAS_Is_Counted(string input, int expected) =>
         Assert.That(WordSearchSolver.Solve(input), Is.EqualTo(expected));
-    
+
     [TestCase("""
               X
               M
@@ -57,7 +57,7 @@ public class WordSearchSolverTests
               """, 2)]
     public void Forwards_Vertical_XMAS_Is_Counted(string input, int expected) =>
         Assert.That(WordSearchSolver.Solve(input), Is.EqualTo(expected));
-    
+
     [TestCase("""
               S
               A
@@ -72,7 +72,7 @@ public class WordSearchSolverTests
               """, 2)]
     public void Backwards_Vertical_XMAS_Is_Counted(string input, int expected) =>
         Assert.That(WordSearchSolver.Solve(input), Is.EqualTo(expected));
-    
+
     [TestCase("""
               X...
               .M..
@@ -99,7 +99,7 @@ public class WordSearchSolverTests
               """, 2)]
     public void Forwards_Diagonal_XMAS_Is_Counted(string input, int expected) =>
         Assert.That(WordSearchSolver.Solve(input), Is.EqualTo(expected));
-    
+
     [TestCase("""
               S...
               .A..
@@ -126,7 +126,7 @@ public class WordSearchSolverTests
               """, 2)]
     public void Backwards_Diagonal_XMAS_Is_Counted(string input, int expected) =>
         Assert.That(WordSearchSolver.Solve(input), Is.EqualTo(expected));
-    
+
     [TestCase("""
               MMMSXXMASM
               MSAMXMSMSA

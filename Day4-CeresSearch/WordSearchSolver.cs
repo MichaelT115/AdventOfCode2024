@@ -1,6 +1,6 @@
 ﻿namespace Day4_CeresSearch;
 
-public static partial class WordSearchSolver
+public static class WordSearchSolver
 {
     public static int Solve(ReadOnlySpan<char> input)
     {
@@ -8,66 +8,81 @@ public static partial class WordSearchSolver
         var columnCount = firstLineBreakIndex != -1 ? firstLineBreakIndex + 1 : input.Length;
 
         var count = 0;
-        for (var i = 0; i < input.Length; ++i)
+        for (var index = 0; index < input.Length; ++index)
         {
-            var character = input[i];
-            if (character != 'X') continue;
+            if (input[index] != 'X') continue;
 
-            // Vertical Down
-            if (i + columnCount * 3 < input.Length && input[i + columnCount] == 'M' &&
-                input[i + columnCount * 2] == 'A' && input[i + columnCount * 3] == 'S')
+            if (CheckVerticalDown(input, index, columnCount))
             {
                 ++count;
             }
 
-            // Vertical Up
-            if (columnCount * 3 <= i && input[i - columnCount] == 'M' &&
-                input[i - columnCount * 2] == 'A' && input[i - columnCount * 3] == 'S')
+            if (CheckVerticalUp(input, index, columnCount))
             {
                 ++count;
             }
 
-            // Diagonal Forward Down
-            if (i + columnCount * 3 + 3 < input.Length && input[i + columnCount + 1] == 'M' &&
-                input[i + columnCount * 2 + 2] == 'A' && input[i + columnCount * 3 + 3] == 'S')
-            {
-                ++count;
-            }
-            
-            // Diagonal Forward Up
-            if (columnCount * 3 -3 <= i && input[i - (columnCount - 1)] == 'M' &&
-                input[i - (columnCount * 2 - 2)] == 'A' && input[i - (columnCount * 3 - 3)] == 'S')
-            {
-                ++count;
-            }
-            
-            // Diagonal Backward Up
-            if (columnCount * 3 + 3 <= i && input[i - (columnCount + 1)] == 'M' &&
-                input[i - (columnCount * 2 + 2)] == 'A' && input[i - (columnCount * 3 + 3)] == 'S')
-            {
-                ++count;
-            }
-            
-            // Diagonal Backward Down
-            if (i + columnCount * 3 - 3 < input.Length && input[i + columnCount - 1] == 'M' &&
-                input[i + columnCount * 2 - 2] == 'A' && input[i + columnCount * 3 - 3] == 'S')
+            if (CheckDiagonalForwardDown(input, index, columnCount))
             {
                 ++count;
             }
 
-            // Horizontal Backward
-            if (i >= 3 && input.Slice(i - 3, 4) is "SAMX")
+            if (CheckDiagonalForwardUp(input, index, columnCount))
             {
                 ++count;
             }
 
-            // Horizontal Forward
-            if (input.Length - i >= 4 && input.Slice(i, 4) is "XMAS")
+            if (CheckDiagonalBackwardsUp(input, index, columnCount))
             {
                 ++count;
             }
+
+            if (CheckDiagonalBackwardsDown(input, index, columnCount))
+            {
+                ++count;
+            }
+
+            if (CheckHorizontalBackwards(input, index))
+            {
+                ++count;
+            }
+
+            if (!CheckHorizontalForwards(input, index)) continue;
+
+            ++count;
+            index += 3;
         }
 
         return count;
     }
+
+    private static bool CheckHorizontalForwards(ReadOnlySpan<char> input, int index) =>
+        input.Length - index >= 4 && input.Slice(index, 4) is "XMAS";
+
+    private static bool CheckHorizontalBackwards(ReadOnlySpan<char> input, int index) =>
+        index >= 3 && input.Slice(index - 3, 4) is "SAMX";
+
+    private static bool CheckDiagonalBackwardsDown(ReadOnlySpan<char> input, int index, int columnCount) =>
+        index + columnCount * 3 - 3 < input.Length && input[index + columnCount - 1] == 'M' &&
+        input[index + columnCount * 2 - 2] == 'A' && input[index + columnCount * 3 - 3] == 'S';
+
+    private static bool CheckDiagonalBackwardsUp(ReadOnlySpan<char> input, int index, int columnCount) =>
+        columnCount * 3 + 3 <= index && input[index - (columnCount + 1)] == 'M' &&
+        input[index - (columnCount * 2 + 2)] == 'A' && input[index - (columnCount * 3 + 3)] == 'S';
+
+    private static bool CheckDiagonalForwardUp(ReadOnlySpan<char> input, int index, int columnCount) =>
+        columnCount * 3 - 3 <= index && input[index - (columnCount - 1)] == 'M' &&
+        input[index - (columnCount * 2 - 2)] == 'A' && input[index - (columnCount * 3 - 3)] == 'S';
+
+    private static bool CheckDiagonalForwardDown(ReadOnlySpan<char> input, int index, int columnCount) =>
+        index + columnCount * 3 + 3 < input.Length && input[index + columnCount + 1] == 'M' &&
+        input[index + columnCount * 2 + 2] == 'A' && input[index + columnCount * 3 + 3] == 'S';
+
+    private static bool CheckVerticalUp(ReadOnlySpan<char> input, int index, int columnCount) =>
+        columnCount * 3 <= index && input[index - columnCount] == 'M' &&
+        input[index - columnCount * 2] == 'A' && input[index - columnCount * 3] == 'S';
+
+    private static bool CheckVerticalDown(ReadOnlySpan<char> input, int index, int columnCount) =>
+        index + columnCount * 3 < input.Length && input[index + columnCount] == 'M' &&
+        input[index + columnCount * 2] == 'A' && input[index + columnCount * 3] == 'S';
 }
