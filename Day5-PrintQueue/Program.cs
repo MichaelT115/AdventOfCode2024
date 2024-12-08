@@ -22,25 +22,36 @@ int[][] ParseQueues(ReadOnlySpan<char> queuesText)
     foreach (var queueText in queuesText.EnumerateLines())
     {
         var queue = new List<int>();
-        foreach (var pageNumber in queueText.Split(","))
+        foreach (var pageNumber in queueText.Split(','))
         {
-            var (start, length) = pageNumber.GetOffsetAndLength(queueText.Length);
-            queue.Add(int.Parse(queueText.Slice(start, length)));
+            queue.Add(ParsePageNumber(pageNumber, queueText));
         }
+
         queues.Add(queue.ToArray());
     }
 
     return queues.ToArray();
 }
 
-(int comesBefore, int comesAfter)[] ParseOrderingRules(ReadOnlySpan<char> pageOrderingRulesText)
+int ParsePageNumber(Range range, ReadOnlySpan<char> queuesText)
+{
+    var (start, length) = range.GetOffsetAndLength(queuesText.Length);
+    return int.Parse(queuesText.Slice(start, length));
+}
+
+(int, int )[] ParseOrderingRules(ReadOnlySpan<char> pageOrderingRulesText)
 {
     var pageOrderingRules = new List<(int comesBefore, int comesAfter)>();
     foreach (var ruleText in pageOrderingRulesText.EnumerateLines())
     {
-        var separatorIndex = ruleText.IndexOf('|');
-        pageOrderingRules.Add((int.Parse(ruleText[..separatorIndex]), int.Parse(ruleText[(separatorIndex + 1)..])));
+        pageOrderingRules.Add(ParsePageOrderingRule(ruleText));
     }
 
     return pageOrderingRules.ToArray();
+}
+
+(int, int) ParsePageOrderingRule(ReadOnlySpan<char> pageOrderingRuleText)
+{
+    var separatorIndex = pageOrderingRuleText.IndexOf('|');
+    return (int.Parse(pageOrderingRuleText[..separatorIndex]), int.Parse(pageOrderingRuleText[(separatorIndex + 1)..]));
 }

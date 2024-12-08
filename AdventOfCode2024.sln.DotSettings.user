@@ -10,6 +10,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ed8a51a8_002De4eb_002D4105_002Daa67_002Dfe7e4e472e9d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Day5-PrintQueue&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\MTCoo\AdventOfCode2024" Presentation="&amp;lt;Day5-PrintQueue&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=queuer/@EntryIndexedValue">True</s:Boolean>
 	
 	
 	
