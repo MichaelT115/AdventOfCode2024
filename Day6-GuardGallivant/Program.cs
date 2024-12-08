@@ -6,5 +6,5 @@ var input = streamReader.ReadToEnd().AsSpan();
 
 var (startPosition, grid) = InputParser.Parse(input);
 
-Console.WriteLine($"Path Positions Count: {PathPredictor.PredictedUniquePathPositionsCount(grid, startPosition)}");
-Console.WriteLine($"Possible Obstruction Position Count: {PathPredictor.PathObstructionPredictor(grid, startPosition)}");
+Console.WriteLine($"Path Positions Count: {PathPredictor.GetPredictedUniqueGuardPathPositionsCount(grid, startPosition)}");
+Console.WriteLine($"Possible Obstruction Position Count: {PathPredictor.GetPossibleObstructionPlacementsCount(grid, startPosition)}");

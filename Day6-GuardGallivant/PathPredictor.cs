@@ -2,7 +2,7 @@
 
 public static class PathPredictor
 {
-    private enum Direction
+    private enum Direction : byte
     {
         North,
         East,
@@ -12,18 +12,18 @@ public static class PathPredictor
         Count
     }
 
-    public static int PredictedUniquePathPositionsCount(PositionType[][] grid,
+    public static int GetPredictedUniqueGuardPathPositionsCount(PositionType[][] grid,
         (int row, int column) guardStartPrediction) =>
-        GetPredictedGuardPathUniquePositions(grid, guardStartPrediction).Count;
+        GetPredictedUniqueGuardPathPositions(grid, guardStartPrediction).Count;
 
-    private static HashSet<(int row, int column)> GetPredictedGuardPathUniquePositions(PositionType[][] grid,
+    private static HashSet<(int row, int column)> GetPredictedUniqueGuardPathPositions(PositionType[][] grid,
         (int row, int column) guardStartPosition)
     {
         var positionsHashSet = new HashSet<(int, int)>();
         var currentDirection = Direction.North;
         var currentPosition = guardStartPosition;
 
-        while (IsInGrid(currentPosition, grid))
+        while (IsPositionInGrid(currentPosition, grid))
         {
             positionsHashSet.Add(currentPosition);
 
@@ -36,7 +36,7 @@ public static class PathPredictor
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            if (!IsInGrid(nextPosition, grid))
+            if (!IsPositionInGrid(nextPosition, grid))
             {
                 break;
             }
@@ -47,16 +47,17 @@ public static class PathPredictor
             }
             else
             {
-                currentDirection = (Direction)((ushort)(currentDirection + 1) % (ushort)Direction.Count);
+                currentDirection = (Direction)((byte)(currentDirection + 1) % (byte)Direction.Count);
             }
         }
 
         return positionsHashSet;
     }
 
-    public static int PathObstructionPredictor(PositionType[][] grid, (int row, int column) guardStartPosition)
+    public static int GetPossibleObstructionPlacementsCount(PositionType[][] grid,
+        (int row, int column) guardStartPosition)
     {
-        var positionsToCheck = GetPredictedGuardPathUniquePositions(grid, guardStartPosition);
+        var positionsToCheck = GetPredictedUniqueGuardPathPositions(grid, guardStartPosition);
         positionsToCheck.Remove(guardStartPosition);
 
         var placedObstructionPositionCount = 0;
@@ -64,23 +65,24 @@ public static class PathPredictor
         foreach (var position in positionsToCheck)
         {
             grid[position.row][position.column] = PositionType.Obstacle;
-            if (GuardIsInLoop(grid, guardStartPosition))
+            if (IsPredictingLoopedPath(grid, guardStartPosition))
             {
                 ++placedObstructionPositionCount;
             }
+
             grid[position.row][position.column] = PositionType.Empty;
         }
 
         return placedObstructionPositionCount;
     }
 
-    private static bool GuardIsInLoop(PositionType[][] grid, (int row, int column) guardStartPosition)
+    private static bool IsPredictingLoopedPath(PositionType[][] grid, (int row, int column) guardStartPosition)
     {
         var positionsHashSet = new HashSet<((int, int), Direction)>();
         var currentDirection = Direction.North;
         var currentPosition = guardStartPosition;
 
-        while (IsInGrid(currentPosition, grid))
+        while (IsPositionInGrid(currentPosition, grid))
         {
             if (!positionsHashSet.Add((currentPosition, currentDirection)))
             {
@@ -96,7 +98,7 @@ public static class PathPredictor
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            if (!IsInGrid(nextPosition, grid))
+            if (!IsPositionInGrid(nextPosition, grid))
             {
                 break;
             }
@@ -107,14 +109,14 @@ public static class PathPredictor
             }
             else
             {
-                currentDirection = (Direction)((ushort)(currentDirection + 1) % (ushort)Direction.Count);
+                currentDirection = (Direction)((byte)(currentDirection + 1) % (byte)Direction.Count);
             }
         }
 
         return false;
     }
 
-    private static bool IsInGrid((int row, int column) position, PositionType[][] grid) =>
+    private static bool IsPositionInGrid((int row, int column) position, PositionType[][] grid) =>
         position.row >= 0 && position.row < grid.Length && position.column >= 0 &&
         position.column < grid[0].Length;
 }

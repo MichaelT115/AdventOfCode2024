@@ -22,7 +22,7 @@ public class PathPredictorTest
     public void Test_Example(string input, int expected)
     {
         var (startPosition, grid) = InputParser.Parse(input);
-        Assert.That(PathPredictor.PredictedUniquePathPositionsCount(grid, startPosition), Is.EqualTo(expected));
+        Assert.That(PathPredictor.GetPredictedUniqueGuardPathPositionsCount(grid, startPosition), Is.EqualTo(expected));
     }
     
     [TestCase("""
@@ -40,6 +40,6 @@ public class PathPredictorTest
     public void Test_Loop_Example(string input, int expected)
     {
         var (startPosition, grid) = InputParser.Parse(input);
-        Assert.That(PathPredictor.PathObstructionPredictor(grid, startPosition), Is.EqualTo(expected));
+        Assert.That(PathPredictor.GetPossibleObstructionPlacementsCount(grid, startPosition), Is.EqualTo(expected));
     }
 }

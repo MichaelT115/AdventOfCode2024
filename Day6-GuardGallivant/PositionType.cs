@@ -1,6 +1,6 @@
 ﻿namespace Day6_GuardGallivant;
 
-public enum PositionType : ushort
+public enum PositionType : byte
 {
     Empty = 0,
     Obstacle = 1,
