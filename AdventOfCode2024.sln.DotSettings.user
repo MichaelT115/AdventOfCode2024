@@ -8,12 +8,14 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=D2C47CB3_002D5321_002D47A3_002D9C80_002D4A4F9B2C304B/@EntryIndexedValue">Day4-CeresSearch.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=D69E7A63_002D6434_002D4E59_002D8650_002DDA11202040D0/@EntryIndexedValue">Day8-ResonantCollinearity.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=F472AB69_002D6A1D_002D4411_002DA72D_002DAF8EBDF745D7/@EntryIndexedValue">Day6-GuardGallivant.Tests</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=F697351C_002DD78B_002D4421_002DB23E_002D15E61F6004B1/@EntryIndexedValue">Day9-DiskFragmenter.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=MSTest/@EntryIndexedValue">d6790ab7-33c2-4425-b2c9-51480cd1a852</s:String>
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/ShowAdvancedOptions/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=NUnit3x/@EntryIndexedValue">db4927dd-2e12-48a7-9a84-2b7e3e31b9c8</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8b8e53a2_002Dfb3a_002D4f1d_002D8729_002Dd84ba5b12597/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Solution /&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8c4c010d_002D6bb9_002D4f5a_002Dbed4_002D5b13f1328117/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Day9-DiskFragmenter&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\MTCoo\AdventOfCode2024" Presentation="&amp;lt;Day9-DiskFragmenter&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	
