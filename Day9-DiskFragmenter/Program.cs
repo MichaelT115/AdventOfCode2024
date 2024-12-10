@@ -2,8 +2,10 @@
 
 using var streamReader = new StreamReader(args[0]);
 
-var memorySpans = FileCompacter.CompactFiles(streamReader.ReadToEnd());
+var input = streamReader.ReadToEnd();
 
-var checkSum = FileCompacter.CalculateCheckSum(memorySpans);
+var memorySpans = FileCompacter.CompactFiles(input);
+var memorySpans2 = FileCompacter.CompactFiles2(input);
 
-Console.WriteLine($"Result: {checkSum}");
+Console.WriteLine($"Result: {FileCompacter.CalculateCheckSum(memorySpans)}");
+Console.WriteLine($"Result: {FileCompacter.CalculateCheckSum(memorySpans2)}");
