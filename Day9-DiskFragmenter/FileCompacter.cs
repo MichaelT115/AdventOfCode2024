@@ -4,6 +4,9 @@ namespace Day9_DiskFragmenter;
 
 public static class FileCompacter
 {
+    // For Check Sum, empty space is functionally zero.
+    private const int EmptySpaceFileId = 0;
+
     public static MemorySpan[] CompactFiles(ReadOnlySpan<char> input)
     {
         if (input.IsEmpty)
@@ -90,65 +93,76 @@ public static class FileCompacter
             return [(0, input[0] - '0')];
         }
 
-        var memorySpansList = new List<(int fileId, int length)>(input.Length / 2);
+        var memorySpansList = ParseMemorySpans(input);
 
-        for (var index = 0; index < input.Length; ++index)
+        var index = memorySpansList.Count - 1;
+        while (index > 1)
         {
-            memorySpansList.Add(new MemorySpan
-            {
-                fileId = index % 2 == 0 ? index / 2 : 0,
-                length = input[index] - '0'
-            });
-        }
-
-
-        const int emptySpaceFileId = 0;
-
-        for (var i = memorySpansList.Count - 1; i > 1; --i)
-        {
-            var memorySpan = memorySpansList[i];
-            if (memorySpan.fileId == emptySpaceFileId)
+            var memorySpan = memorySpansList[index];
+            if (memorySpan.fileId == EmptySpaceFileId)
             {
                 if (memorySpan.length == 0)
                 {
-                    memorySpansList.RemoveAt(i);
+                    memorySpansList.RemoveAt(index);
                 }
-                else if (i < memorySpansList.Count - 1 && memorySpansList[i + 1].fileId == emptySpaceFileId)
+                else if (index < memorySpansList.Count - 1 && memorySpansList[index + 1].fileId == EmptySpaceFileId)
                 {
-                    memorySpansList[i] = memorySpan with
+                    memorySpansList[index] = memorySpan with
                     {
-                        length = memorySpan.length + memorySpansList[i + 1].length
+                        length = memorySpan.length + memorySpansList[index + 1].length
                     };
-                    memorySpansList.RemoveAt(i + 1);
+                    memorySpansList.RemoveAt(index + 1);
                 }
-
+                --index;
                 continue;
             }
 
-            for (var j = 1; j < i; ++j)
+            var swapped = false;
+            for (var j = 1; j < index; ++j)
             {
                 var targetMemorySpan = memorySpansList[j];
-                if (targetMemorySpan.fileId != emptySpaceFileId || targetMemorySpan.length < memorySpan.length)
+                if (targetMemorySpan.fileId != EmptySpaceFileId || targetMemorySpan.length < memorySpan.length)
                 {
                     continue;
                 }
 
-                memorySpansList[i] = memorySpan with { fileId = emptySpaceFileId };
+                memorySpansList[index] = memorySpan with { fileId = EmptySpaceFileId };
 
                 var spaceLeft = targetMemorySpan.length - memorySpan.length;
                 memorySpansList[j] = memorySpan;
                 if (spaceLeft > 0)
                 {
-                    memorySpansList.Insert(j + 1, new MemorySpan { fileId = emptySpaceFileId, length = spaceLeft });
-                    ++i;
+                    memorySpansList.Insert(j + 1, new MemorySpan { fileId = EmptySpaceFileId, length = spaceLeft });
+                    ++index;
                 }
 
-                ++i;
+                swapped = true;
                 break;
+            }
+
+            if (!swapped)
+            {
+                --index;
             }
         }
 
         return memorySpansList.ToArray();
+    }
+
+    private static List<MemorySpan> ParseMemorySpans(ReadOnlySpan<char> input)
+    {
+        var memorySpansList = new List<MemorySpan>(input.Length);
+
+        for (var index = 0; index < input.Length; ++index)
+        {
+            memorySpansList.Add(new MemorySpan
+            {
+                fileId = index % 2 == 0 ? index / 2 : EmptySpaceFileId,
+                length = input[index] - '0'
+            });
+        }
+
+        return memorySpansList;
     }
 
     public static ulong CalculateCheckSum(ReadOnlySpan<MemorySpan> memorySpans)
@@ -157,6 +171,7 @@ public static class FileCompacter
         var index = 0ul;
         foreach (var (fileId, length) in memorySpans)
         {
+            if (fileId == EmptySpaceFileId) continue;
             for (var i = 0; i < length; ++i)
             {
                 checkSum += (ulong)fileId * index++;
