@@ -60,6 +60,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day10-HoofIt", "Day10-HoofI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day10-HoofIt.Tests", "Day10-HoofIt.Tests\Day10-HoofIt.Tests.csproj", "{22F7A645-D2F4-42E8-99B6-73B3C42A7286}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day11-PlutonianPebbles", "Day11-PlutonianPebbles\Day11-PlutonianPebbles\Day11-PlutonianPebbles.csproj", "{4D8A549E-E96B-427D-85B3-C55E1948B741}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day11-PlutonianPebblesTests", "Day11-PlutonianPebbles\Day11-PlutonianPebblesTests\Day11-PlutonianPebblesTests.csproj", "{28A79004-7566-41FB-8E71-7DB4B9A356AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -146,6 +150,14 @@ Global
 		{22F7A645-D2F4-42E8-99B6-73B3C42A7286}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22F7A645-D2F4-42E8-99B6-73B3C42A7286}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22F7A645-D2F4-42E8-99B6-73B3C42A7286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D8A549E-E96B-427D-85B3-C55E1948B741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D8A549E-E96B-427D-85B3-C55E1948B741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D8A549E-E96B-427D-85B3-C55E1948B741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D8A549E-E96B-427D-85B3-C55E1948B741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A79004-7566-41FB-8E71-7DB4B9A356AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A79004-7566-41FB-8E71-7DB4B9A356AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A79004-7566-41FB-8E71-7DB4B9A356AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A79004-7566-41FB-8E71-7DB4B9A356AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9499AA36-E566-4E47-9154-ECBDDD236572} = {DF1E5804-DA04-4A81-B696-1DB7FC82A221}

@@ -5,6 +5,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=402EBC65_002D56D1_002D44CA_002DBE17_002D0B219C433813/@EntryIndexedValue">Day3-MullItOver.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=413BBA55_002D84FC_002D4A4C_002D85A6_002D8075DDC08EF0/@EntryIndexedValue">Day2-RedNoseReports.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=4C201B2B_002D17B3_002D4F1A_002DB34A_002DCBA442D6DD28/@EntryIndexedValue">Day10-HoofIt.Tests</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=4D8A549E_002DE96B_002D427D_002D85B3_002DC55E1948B741/@EntryIndexedValue">Day11-PlutonianPebblesTests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=9499AA36_002DE566_002D4E47_002D9154_002DECBDDD236572/@EntryIndexedValue">5CE34720-021B-4FBB-B51A-6551677F9814</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=D2C47CB3_002D5321_002D47A3_002D9C80_002D4A4F9B2C304B/@EntryIndexedValue">Day4-CeresSearch.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=D69E7A63_002D6434_002D4E59_002D8650_002DDA11202040D0/@EntryIndexedValue">Day8-ResonantCollinearity.Tests</s:String>
@@ -14,7 +15,9 @@
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/ShowAdvancedOptions/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=NUnit3x/@EntryIndexedValue">db4927dd-2e12-48a7-9a84-2b7e3e31b9c8</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d172c177_002D22cb_002D41d1_002Db235_002D9f0bf3a3a4a3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Day10-HoofIt&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\MTCoo\AdventOfCode2024" Presentation="&amp;lt;Day10-HoofIt&amp;gt;" /&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::28A79004-7566-41FB-8E71-7DB4B9A356AF::net9.0::Day11_PlutonianPebblesTests.StoneCounterTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
 	
