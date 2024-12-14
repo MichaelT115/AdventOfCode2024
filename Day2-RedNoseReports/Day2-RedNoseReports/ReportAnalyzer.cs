@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-namespace Day2_RedNoseReports.Part1;
+namespace Day2_RedNoseReports;
 
 public static class ReportAnalyzer
 {

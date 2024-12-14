@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Day11_PlutonianPebbles;
+﻿using Day11_PlutonianPebbles;
 using NUnit.Framework;
 
 namespace Day11_PlutonianPebblesTests;

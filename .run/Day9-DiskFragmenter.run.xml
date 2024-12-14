@@ -1,0 +1,20 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Day9-DiskFragmenter" type="DotNetProject" factoryName=".NET Project">
+    <option name="EXE_PATH" value="$PROJECT_DIR$/Day9-DiskFragmenter/Day9-DiskFragmenter/bin/Release/net9.0/Day9-DiskFragmenter.dll" />
+    <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/Inputs/Day9.txt" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Day9-DiskFragmenter/Day9-DiskFragmenter/bin/Release/net9.0" />
+    <option name="PASS_PARENT_ENVS" value="1" />
+    <option name="USE_EXTERNAL_CONSOLE" value="0" />
+    <option name="USE_MONO" value="0" />
+    <option name="RUNTIME_ARGUMENTS" value="" />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Day9-DiskFragmenter/Day9-DiskFragmenter/Day9-DiskFragmenter.csproj" />
+    <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+    <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+    <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+    <option name="PROJECT_KIND" value="StaticMethod" />
+    <option name="PROJECT_TFM" value="net9.0" />
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

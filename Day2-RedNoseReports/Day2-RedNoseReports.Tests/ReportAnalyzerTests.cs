@@ -1,5 +1,4 @@
-﻿using Day2_RedNoseReports.Part1;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Day2_RedNoseReports.Tests;
 

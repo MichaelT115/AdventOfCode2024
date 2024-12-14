@@ -1,4 +1,6 @@
-﻿public static class TrailHeadFinder
+﻿namespace Day10_HoofIt;
+
+public static class TrailHeadFinder
 {
     public static int CountTrailHeadScores(ReadOnlySpan<char> input)
     {

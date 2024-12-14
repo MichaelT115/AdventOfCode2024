@@ -1,4 +1,6 @@
-﻿using var streamReader = new StreamReader(args[0]);
+﻿using Day10_HoofIt;
+
+using var streamReader = new StreamReader(args[0]);
 
 var input = streamReader.ReadToEnd();
 

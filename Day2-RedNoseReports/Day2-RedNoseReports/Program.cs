@@ -1,4 +1,4 @@
-﻿using Day2_RedNoseReports.Part1;
+﻿using Day2_RedNoseReports;
 
 using var streamReader = new StreamReader(args[0]);
 
