@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Day9_DiskFragmenter.Tests;
 
@@ -10,7 +11,7 @@ public class FileCompacterTests
 {
     private static object[] _compactingTestCases =
     [
-        new object[] { "", System.Array.Empty<(int, int)>() },
+        new object[] { "", Array.Empty<(int, int)>() },
         new object[] { "1", new MemorySpan[] { (0, 1) } },
         new object[] { "11", new MemorySpan[] { (0, 1) } },
         new object[] { "111", new MemorySpan[] { (0, 1), (1, 1) } },
@@ -39,7 +40,7 @@ public class FileCompacterTests
 
     private static object[] _compactingTestCases2 =
     [
-        new object[] { "", System.Array.Empty<(int, int)>() },
+        new object[] { "", Array.Empty<(int, int)>() },
         new object[] { "1", new MemorySpan[] { (0, 1) } },
         new object[] { "11", new MemorySpan[] { (0, 1), (0, 1) } },
         new object[] { "111", new MemorySpan[] { (0, 1), (1, 1), (0, 1) } },
