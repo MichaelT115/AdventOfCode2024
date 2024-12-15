@@ -13,8 +13,8 @@ public static class TokenCalculator
             prize.Y += 10000000000000L;
         }
 
-        var buttonAy = (prize.X * buttonA.Y - buttonA.X * prize.Y);
-        var buttonBx = (buttonB.X * buttonA.Y - buttonA.X * buttonB.Y);
+        var buttonAy = prize.X * buttonA.Y - buttonA.X * prize.Y;
+        var buttonBx = buttonB.X * buttonA.Y - buttonA.X * buttonB.Y;
         if (buttonAy % buttonBx != 0)
         {
             lowestNeededTokens = int.MaxValue;
@@ -28,7 +28,7 @@ public static class TokenCalculator
             return false;
         }
 
-        var buttonBy = (prize.Y - buttonB.Y * bPresses);
+        var buttonBy = prize.Y - buttonB.Y * bPresses;
         if (buttonA.Y != 0 && buttonBy % buttonA.Y != 0)
         {
             lowestNeededTokens = int.MaxValue;
