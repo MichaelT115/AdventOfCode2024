@@ -1,8 +1,8 @@
 ﻿<component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Day6-GuardGallivant" type="DotNetProject" factoryName=".NET Project">
-    <option name="EXE_PATH" value="$PROJECT_DIR$/Day6-GuardGallivant/Day6-GuardGallivant/bin/Release/net9.0/Day6-GuardGallivant.dll" />
+    <option name="EXE_PATH" value="$PROJECT_DIR$/Day6-GuardGallivant/Day6-GuardGallivant/bin/Debug/net9.0/Day6-GuardGallivant.exe" />
     <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/Inputs/Day6.txt" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Day6-GuardGallivant/Day6-GuardGallivant/bin/Release/net9.0" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Day6-GuardGallivant/Day6-GuardGallivant/bin/Debug/net9.0" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
@@ -11,7 +11,7 @@
     <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
     <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
     <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-    <option name="PROJECT_KIND" value="StaticMethod" />
+    <option name="PROJECT_KIND" value="DotNetCore" />
     <option name="PROJECT_TFM" value="net9.0" />
     <method v="2">
       <option name="Build" />

@@ -1,13 +1,13 @@
 ﻿<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Day12-GardenGroups" type="DotNetProject" factoryName=".NET Project">
-    <option name="EXE_PATH" value="$PROJECT_DIR$/Day12-GardenGroups/Day12-GardenGroups/bin/Debug/net9.0/Day12-GardenGroups.exe" />
-    <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/Inputs/Day12.txt" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Day12-GardenGroups/Day12-GardenGroups/bin/Debug/net9.0" />
+  <configuration default="false" name="Day15-WarehouseWoes" type="DotNetProject" factoryName=".NET Project">
+    <option name="EXE_PATH" value="$PROJECT_DIR$/Day15-WarehouseWoes/Day15-WarehouseWoes/bin/Debug/net9.0/Day15-WarehouseWoes.exe" />
+    <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/Inputs/Day15.txt" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Day15-WarehouseWoes/Day15-WarehouseWoes/bin/Debug/net9.0" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
     <option name="RUNTIME_ARGUMENTS" value="" />
-    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Day12-GardenGroups/Day12-GardenGroups/Day12-GardenGroups.csproj" />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Day15-WarehouseWoes/Day15-WarehouseWoes/Day15-WarehouseWoes.csproj" />
     <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
     <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
     <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />

@@ -1,13 +1,13 @@
 ﻿<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Day12-GardenGroups" type="DotNetProject" factoryName=".NET Project">
-    <option name="EXE_PATH" value="$PROJECT_DIR$/Day12-GardenGroups/Day12-GardenGroups/bin/Debug/net9.0/Day12-GardenGroups.exe" />
-    <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/Inputs/Day12.txt" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Day12-GardenGroups/Day12-GardenGroups/bin/Debug/net9.0" />
+  <configuration default="false" name="Day13-ClawContraption" type="DotNetProject" factoryName=".NET Project">
+    <option name="EXE_PATH" value="$PROJECT_DIR$/Day13-ClawContraption/Day13-ClawContraption/bin/Debug/net9.0/Day13-ClawContraption.exe" />
+    <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/Inputs/Day13.txt" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Day13-ClawContraption/Day13-ClawContraption/bin/Debug/net9.0" />
     <option name="PASS_PARENT_ENVS" value="1" />
     <option name="USE_EXTERNAL_CONSOLE" value="0" />
     <option name="USE_MONO" value="0" />
     <option name="RUNTIME_ARGUMENTS" value="" />
-    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Day12-GardenGroups/Day12-GardenGroups/Day12-GardenGroups.csproj" />
+    <option name="PROJECT_PATH" value="$PROJECT_DIR$/Day13-ClawContraption/Day13-ClawContraption/Day13-ClawContraption.csproj" />
     <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
     <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
     <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />

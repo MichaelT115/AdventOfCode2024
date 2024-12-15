@@ -2,7 +2,7 @@
 
 namespace Day14_RestroomRedoubt;
 
-internal partial class Program
+internal sealed partial class Program
 {
     private const int Ticks = 100;
     private const int Width = 101;
