@@ -1,0 +1,1 @@
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Day14-RestroomRedoubt.Tests")]

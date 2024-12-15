@@ -9,6 +9,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=5727548A_002DA48A_002D452D_002DA006_002D16B41E285852/@EntryIndexedValue">Day12-GardenGroups.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=9499AA36_002DE566_002D4E47_002D9154_002DECBDDD236572/@EntryIndexedValue">5CE34720-021B-4FBB-B51A-6551677F9814</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=A33CC1F4_002D6022_002D438C_002DA100_002DB4ECA718A3EA/@EntryIndexedValue">Day13-ClawContraption.Tests</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=C6077B52_002DFC11_002D4CA3_002DA3DC_002DE7189F342CFA/@EntryIndexedValue">Day14-RestroomRedoubt.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=D2C47CB3_002D5321_002D47A3_002D9C80_002D4A4F9B2C304B/@EntryIndexedValue">Day4-CeresSearch.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=D69E7A63_002D6434_002D4E59_002D8650_002DDA11202040D0/@EntryIndexedValue">Day8-ResonantCollinearity.Tests</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=F472AB69_002D6A1D_002D4411_002DA72D_002DAF8EBDF745D7/@EntryIndexedValue">Day6-GuardGallivant.Tests</s:String>
@@ -16,9 +17,10 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=MSTest/@EntryIndexedValue">d6790ab7-33c2-4425-b2c9-51480cd1a852</s:String>
 	<s:Boolean x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/ShowAdvancedOptions/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=NUnit3x/@EntryIndexedValue">db4927dd-2e12-48a7-9a84-2b7e3e31b9c8</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b4bca12a_002D994c_002D4bbd_002Db37c_002D9b293d3de61d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Day13-ClawContraption&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Project Location="C:\Users\MTCoo\AdventOfCode2024" Presentation="&amp;lt;Day13-ClawContraption&amp;gt;" /&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ac86904b_002D0f6e_002D4714_002Da4c6_002D29f24ecb3c91/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;Day14-RestroomRedoubt&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\MTCoo\AdventOfCode2024" Presentation="&amp;lt;Day14-RestroomRedoubt&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	
