@@ -2,48 +2,44 @@ namespace Day16_ReindeerMaze;
 
 public static class PathSolver
 {
-    private  static readonly IntVector2[] Directions= [
+    private record struct IntVector2(int X, int Y)
+    {
+        public static IntVector2 operator +(IntVector2 a, IntVector2 b)
+            => new(a.X + b.X, a.Y + b.Y);
+
+        public static IntVector2 operator -(IntVector2 a, IntVector2 b)
+            => new(a.X - b.X, a.Y - b.Y);
+    }
+
+    private record struct RobotState(IntVector2 Position, IntVector2 Direction);
+
+    private record struct PathNode(
+        RobotState RobotState,
+        int CheapestPathToNodeCost,
+        int EstimatedPathThatGoesThroughNodeCost);
+    
+    private static readonly IntVector2[] Directions =
+    [
         new IntVector2(1, 0),
         new IntVector2(0, 1),
         new IntVector2(-1, 0),
         new IntVector2(0, -1)
     ];
 
-    private record struct IntVector2(int X, int Y)
-    {
-        public static IntVector2 operator +(IntVector2 a, IntVector2 b)
-            => new(a.X + b.X, a.Y + b.Y);
-        
-        public static IntVector2 operator -(IntVector2 a, IntVector2 b)
-            => new(a.X - b.X, a.Y - b.Y);
-    }
-
-    private record struct RobotState(IntVector2 Position, IntVector2 Direction);
-    
-    private record struct PathNode
-    {
-        public RobotState RobotState;
-        public RobotState ComeFromRobotState;
-
-        public int CheapestPathToNodeCost;
-        public IntVector2 ComeFromDirection;
-        public int EstimatedPathThatGoesThroughNodeCost;
-    }
-
-    public static long FindLowestScorePath(ReadOnlySpan<char> input)
+    public static long FindCheapestPathCost(ReadOnlySpan<char> input)
     {
         var (startRobotState, exitPosition, walls) = ParseInput(input);
 
         var pathNodes = GeneratePathNodes(startRobotState, exitPosition, walls);
-        
+
         return Directions
             .Select(direction => pathNodes.TryGetValue(new RobotState(exitPosition, direction), out var pathNode)
                 ? pathNode.EstimatedPathThatGoesThroughNodeCost
                 : int.MaxValue)
             .Min();
     }
-    
-    public static long FindPositionsAlongLowestScorePathsCount(ReadOnlySpan<char> input)
+
+    public static long FindPositionsAlongCheapestPathsCount(ReadOnlySpan<char> input)
     {
         var (startRobotState, exitPosition, walls) = ParseInput(input);
 
@@ -65,7 +61,7 @@ public static class PathSolver
         {
             AddPositionsOnCheapestPath(endRobotState, pathNodes, positionsAlongCheapestPath);
         }
-        
+
         return positionsAlongCheapestPath.Count;
     }
 
@@ -73,23 +69,25 @@ public static class PathSolver
         HashSet<IntVector2> positionsAlongCheapestPath)
     {
         var cheapestCostToReachRobotState = pathNodes[robotState].CheapestPathToNodeCost;
-        
+
         positionsAlongCheapestPath.Add(robotState.Position);
-        
+
         var neighborsOnCheapestPath = Directions
             .SelectMany(offset =>
                 Directions.Select(direction => new RobotState(robotState.Position + offset, direction)))
             .Where(neighborRobotState => pathNodes.TryGetValue(neighborRobotState, out var pathNode) &&
                                          pathNode.CheapestPathToNodeCost
-                                         + DistanceCost(neighborRobotState, robotState.Position) == cheapestCostToReachRobotState);
-        
+                                         + DistanceCost(neighborRobotState, robotState.Position) ==
+                                         cheapestCostToReachRobotState);
+
         foreach (var neighborRobotState in neighborsOnCheapestPath)
         {
             AddPositionsOnCheapestPath(neighborRobotState, pathNodes, positionsAlongCheapestPath);
         }
     }
 
-    private static Dictionary<RobotState, PathNode> GeneratePathNodes(RobotState startRobotState, IntVector2 exitPosition, HashSet<IntVector2> walls)
+    private static Dictionary<RobotState, PathNode> GeneratePathNodes(RobotState startRobotState,
+        IntVector2 exitPosition, HashSet<IntVector2> walls)
     {
         var pathNodes = new Dictionary<RobotState, PathNode>
         {
@@ -97,7 +95,6 @@ public static class PathSolver
                 startRobotState, new PathNode
                 {
                     RobotState = startRobotState,
-                    ComeFromDirection = new IntVector2(1, 0),
                     CheapestPathToNodeCost = 0,
                     EstimatedPathThatGoesThroughNodeCost = 0
                 }
@@ -143,19 +140,15 @@ public static class PathSolver
 
                     pathNodes[potentialRobotState] = neighborNode with
                     {
-                        ComeFromRobotState = lowestCostNode.RobotState,
                         CheapestPathToNodeCost = tentativePathToNeighborNodeCost,
-                        EstimatedPathThatGoesThroughNodeCost = estimatedPathCost,
+                        EstimatedPathThatGoesThroughNodeCost = estimatedPathCost
                     };
-
-                    openPositions.Add(potentialRobotState);
                 }
                 else
                 {
                     pathNodes.Add(potentialRobotState, new PathNode
                     {
                         RobotState = potentialRobotState,
-                        ComeFromRobotState = lowestCostNode.RobotState,
                         CheapestPathToNodeCost = tentativePathToNeighborNodeCost,
                         EstimatedPathThatGoesThroughNodeCost = estimatedPathCost
                     });
@@ -171,7 +164,8 @@ public static class PathSolver
         return pathNodes;
     }
 
-    private static (RobotState robotStartState, IntVector2 exitPosition, HashSet<IntVector2> walls) ParseInput(ReadOnlySpan<char> input)
+    private static (RobotState robotStartState, IntVector2 exitPosition, HashSet<IntVector2> walls) ParseInput(
+        ReadOnlySpan<char> input)
     {
         var lineEnumerator = input.EnumerateLines();
 
@@ -204,14 +198,14 @@ public static class PathSolver
 
         return (robotStartState, exitPosition, walls);
     }
-    
+
     private static int DistanceCost(RobotState currentRobotState, IntVector2 neighborPosition)
     {
         if (currentRobotState.Position == neighborPosition)
         {
             return 0;
         }
-        
+
         var offset = neighborPosition - currentRobotState.Position;
         var xDirection = Math.Sign(offset.X);
         var turns = currentRobotState.Direction.X == xDirection
@@ -222,7 +216,8 @@ public static class PathSolver
         return turns * 1000 + moves;
     }
 
-    private static PathNode GetLowestCostPathNode(Dictionary<RobotState, PathNode> pathNodes, List<RobotState> openPositions)
+    private static PathNode GetLowestCostPathNode(Dictionary<RobotState, PathNode> pathNodes,
+        List<RobotState> openPositions)
     {
         var lowestCostNode = pathNodes[openPositions[0]];
 
@@ -236,6 +231,7 @@ public static class PathSolver
                 lowestCostNode = pathNode;
             }
         }
+
         return lowestCostNode;
     }
 }

@@ -77,7 +77,7 @@ public static class RegionFinder
                          positionsInRegion.Contains(position + width),
                          height > 1 && positionsInRegion.Contains(position + width - 1),
                          positionsInRegion.Contains(position - 1),
-                         positionsInRegion.Contains(position - width - 1),
+                         positionsInRegion.Contains(position - width - 1)
                      }))
             {
                 for (var i = 0; i < 8; i += 2)
