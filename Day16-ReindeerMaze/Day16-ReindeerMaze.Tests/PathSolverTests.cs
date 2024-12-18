@@ -12,25 +12,41 @@ public class PathSolverTests
               ####
               #SE#
               ####
-              """, 1)]
+              """, 1, 2)]
     [TestCase("""
               #####
               #S E#
               #####
-              """, 2)]
+              """, 2, 3)]
     [TestCase("""
               #####
               #E S#
               #####
-              """, 2002)]
+              """, 2002, 3)]
     
     [TestCase("""
               #####
               #E  #
-              #   #
+              # # #
               #  S#
               #####
-              """, 2004)]
+              """, 2004, 5)]
+    
+    [TestCase("""
+              #####
+              #   #
+              #S#E#
+              #   #
+              #####
+              """, 3004, 8)]
+    
+    [TestCase("""
+              ########
+              #S   ###
+              ## # ###
+              ##    E#
+              ########
+              """, 2007, 11)]
     
     [TestCase("""
               ###############
@@ -48,7 +64,7 @@ public class PathSolverTests
               #.###.#.#.#.#.#
               #S..#.....#...#
               ###############
-              """, 7036)]
+              """, 7036, 45)]
     [TestCase("""
               #################
               #...#...#...#..E#
@@ -67,7 +83,10 @@ public class PathSolverTests
               #.#.#.#########.#
               #S#.............#
               #################
-              """, 11048)]
-    public void Test_Examples(string input, int expected) =>
-        Assert.That(PathSolver.FindLowestScorePath(input), Is.EqualTo(expected));
+              """, 11048, 64)]
+    public void Test_Examples(string input, int expectedPathCost, int expectedPositionsOnCheapestPaths)
+    {
+        Assert.That(PathSolver.FindLowestScorePath(input), Is.EqualTo(expectedPathCost));
+        Assert.That(PathSolver.FindPositionsAlongLowestScorePathsCount(input), Is.EqualTo(expectedPositionsOnCheapestPaths));
+    }
 }
