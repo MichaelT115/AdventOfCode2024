@@ -94,6 +94,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day16-ReindeerMaze", "Day16
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day16-ReindeerMaze.Tests", "Day16-ReindeerMaze\Day16-ReindeerMaze.Tests\Day16-ReindeerMaze.Tests.csproj", "{9A3FCF0E-C2C0-4D50-9003-135070ECB823}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day17-ChronospatialComputer", "Day17-ChronospatialComputer\Day17-ChronospatialComputer\Day17-ChronospatialComputer.csproj", "{64A0FF18-820A-4719-A3A3-CD897200821E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day17-ChronospatialComputer", "Day17-ChronospatialComputer", "{B36FD8D0-A26A-460F-9F73-3814DA486EAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day17-ChronospatialComputer.Tests", "Day17-ChronospatialComputer\Day17-ChronospatialComputer.Tests\Day17-ChronospatialComputer.Tests.csproj", "{9C35E128-700E-4AAA-A4ED-1A84E4025752}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -224,6 +230,14 @@ Global
 		{9A3FCF0E-C2C0-4D50-9003-135070ECB823}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A3FCF0E-C2C0-4D50-9003-135070ECB823}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A3FCF0E-C2C0-4D50-9003-135070ECB823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A0FF18-820A-4719-A3A3-CD897200821E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A0FF18-820A-4719-A3A3-CD897200821E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A0FF18-820A-4719-A3A3-CD897200821E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A0FF18-820A-4719-A3A3-CD897200821E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C35E128-700E-4AAA-A4ED-1A84E4025752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C35E128-700E-4AAA-A4ED-1A84E4025752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C35E128-700E-4AAA-A4ED-1A84E4025752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C35E128-700E-4AAA-A4ED-1A84E4025752}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9499AA36-E566-4E47-9154-ECBDDD236572} = {DF1E5804-DA04-4A81-B696-1DB7FC82A221}
@@ -257,5 +271,7 @@ Global
 		{BAC7AA13-0047-4647-AA98-C651B75E3ED4} = {23397AE6-3356-43FF-87B1-8FDDF7DE98D8}
 		{D0B1203F-A07A-45C5-8E69-3E6ECDF06356} = {7DD4E0EC-FF7E-4E2E-88B9-8A07DFD9CE42}
 		{9A3FCF0E-C2C0-4D50-9003-135070ECB823} = {7DD4E0EC-FF7E-4E2E-88B9-8A07DFD9CE42}
+		{64A0FF18-820A-4719-A3A3-CD897200821E} = {B36FD8D0-A26A-460F-9F73-3814DA486EAC}
+		{9C35E128-700E-4AAA-A4ED-1A84E4025752} = {B36FD8D0-A26A-460F-9F73-3814DA486EAC}
 	EndGlobalSection
 EndGlobal
