@@ -1,33 +1,25 @@
-﻿using Microsoft.VisualBasic;
-
-namespace Day17_ChronospatialComputer;
+﻿namespace Day17_ChronospatialComputer;
 
 public sealed class ChronospatialComputer
 {
-    public required int RegisterA;
-    public required int RegisterB;
-    public required int RegisterC;
+    public required long RegisterA;
+    public required long RegisterB;
+    public required long RegisterC;
 
-    public (int registerA, int registerB, int registerC) Registers => (RegisterA, RegisterB, RegisterC);
+    public (long registerA, long registerB, long registerC) Registers => (RegisterA, RegisterB, RegisterC);
 
     public int[] RunProgram(ReadOnlySpan<byte> program)
     {
         var output = new List<int>();
-
-        var operationCount = 0;
         
         var instructionPointer = 0;
         while (instructionPointer < program.Length - 1)
         {
             var operand = program[instructionPointer + 1];
-            
-            Console.WriteLine(
-                $"{operationCount++}:\t{{ {program[instructionPointer]}, {operand} }}\tA: {RegisterA}\tB: {RegisterB}\tC: {RegisterC}\tCurrent Output: {string.Join(',', output)}");
-
             switch (program[instructionPointer])
             {
                 case 0:
-                    RegisterA = (int)(RegisterA / Math.Pow(2, GetComboOperandValue(operand)));
+                    RegisterA >>= (int)GetComboOperandValue(operand);
                     instructionPointer += 2;
                     break;
                 case 1:
@@ -54,15 +46,15 @@ public sealed class ChronospatialComputer
                     instructionPointer += 2;
                     break;
                 case 5:
-                    output.Add(GetComboOperandValue(operand) % 8);
+                    output.Add((int)(GetComboOperandValue(operand) % 8));
                     instructionPointer += 2;
                     break;
                 case 6:
-                    RegisterB = (int)(RegisterA / Math.Pow(2, GetComboOperandValue(operand)));
+                    RegisterB = RegisterA >> (int)GetComboOperandValue(operand);
                     instructionPointer += 2;
                     break;
                 case 7:
-                    RegisterC = (int)(RegisterA / Math.Pow(2, GetComboOperandValue(operand)));
+                    RegisterC = RegisterA >> (int)GetComboOperandValue(operand);
                     instructionPointer += 2;
                     break;
                 default: throw new Exception("Unknown Operation");
@@ -71,7 +63,7 @@ public sealed class ChronospatialComputer
 
         return output.ToArray();
 
-        int GetComboOperandValue(byte operand) =>
+        long GetComboOperandValue(byte operand) =>
             operand switch
             {
                 <= 3 => operand,
