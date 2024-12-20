@@ -2,20 +2,22 @@ namespace Day18_RAMRun;
 
 public static class PathSolver
 {
-    private record struct IntVector2(int X, int Y)
+    public readonly record struct IntVector2(int X, int Y)
     {
         public static IntVector2 operator +(IntVector2 a, IntVector2 b)
             => new(a.X + b.X, a.Y + b.Y);
 
         public static IntVector2 operator -(IntVector2 a, IntVector2 b)
             => new(a.X - b.X, a.Y - b.Y);
+
+        public readonly override string ToString() => $"{X},{Y}";
     }
-    
+
     private record struct PathNode(
         IntVector2 Position,
         int CheapestPathToNodeCost,
         int EstimatedPathThatGoesThroughNodeCost);
-    
+
     private static readonly IntVector2[] Directions =
     [
         new IntVector2(1, 0),
@@ -26,7 +28,7 @@ public static class PathSolver
 
     public static long FindShortestPathLength(ReadOnlySpan<char> input)
     {
-        var obstacles= ParseInput(input, 1024);
+        var obstacles = ParseInput(input, 1024);
 
         var startPosition = new IntVector2(0, 0);
         var exitPosition = new IntVector2(70, 70);
@@ -34,6 +36,34 @@ public static class PathSolver
 
         return pathNodes[exitPosition].CheapestPathToNodeCost;
     }
+
+    public static IntVector2 FindObstacleThatMakesPathImpossible(ReadOnlySpan<char> input)
+    {
+        var obstacles = new HashSet<IntVector2>();
+
+        var startPosition = new IntVector2(0, 0);
+        var exitPosition = new IntVector2(70, 70);
+
+        //var index = 0;
+        foreach (var line in input.EnumerateLines())
+        {
+            var commaIndex = line.IndexOf(',');
+            var newObstacle = new IntVector2(int.Parse(line[..commaIndex]), int.Parse(line[(commaIndex + 1)..]));
+            obstacles.Add(newObstacle);
+
+            // Console.WriteLine($"Trying Byte {index++}: {newObstacle}");
+
+            var pathNodes = GeneratePathNodes(startPosition, exitPosition, obstacles);
+
+            if (!pathNodes.ContainsKey(exitPosition))
+            {
+                return newObstacle;
+            }
+        }
+
+        return new IntVector2(-1, -1);
+    }
+
     private static Dictionary<IntVector2, PathNode> GeneratePathNodes(IntVector2 startPosition,
         IntVector2 exitPosition, HashSet<IntVector2> walls)
     {
@@ -68,7 +98,8 @@ public static class PathSolver
             {
                 var neighbor = lowestCostNode.Position + direction;
 
-                if (neighbor.X is < 0 or > 70 || neighbor.Y is < 0 or > 70 || walls.Contains(neighbor) || closedPositions.Contains(neighbor))
+                if (neighbor.X is < 0 or > 70 || neighbor.Y is < 0 or > 70 || walls.Contains(neighbor) ||
+                    closedPositions.Contains(neighbor))
                 {
                     continue;
                 }
@@ -111,7 +142,7 @@ public static class PathSolver
         return pathNodes;
     }
 
-    private static HashSet<IntVector2> ParseInput(ReadOnlySpan<char> input, int maxReadCount)
+    private static HashSet<IntVector2> ParseInput(ReadOnlySpan<char> input, int maxReadCount = int.MaxValue)
     {
         var obstacles = new HashSet<IntVector2>(input.Length);
 
@@ -122,11 +153,11 @@ public static class PathSolver
             {
                 break;
             }
-             
+
             var commaIndex = line.IndexOf(',');
             obstacles.Add(new IntVector2(int.Parse(line[..commaIndex]), int.Parse(line[(commaIndex + 1)..])));
         }
-        
+
         return obstacles;
     }
 
