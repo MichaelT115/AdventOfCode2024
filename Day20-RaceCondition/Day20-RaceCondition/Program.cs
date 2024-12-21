@@ -2,6 +2,7 @@
 
 using var streamReader = new StreamReader(args[0]);
 
-var input = streamReader.ReadToEnd();
+var input = streamReader.ReadToEnd().AsSpan();
 
-Console.WriteLine($"Result: {CheatFinder.FindCheatPositions(input, 100)}");
+Console.WriteLine($"Result (Max Cheat Time 2): {CheatFinder.FindCheatPositions(input, 100, 2)}");
+Console.WriteLine($"Result (Max Cheat Time 20): {CheatFinder.FindCheatPositions(input, 100, 20)}");

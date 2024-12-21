@@ -19,32 +19,45 @@ public static class CheatFinder
         new IntVector2(0, -1)
     ];
 
-    public static int FindCheatPositions(ReadOnlySpan<char> input, int cheatLimit)
+    public static int FindCheatPositions(ReadOnlySpan<char> input, int minimumTimeSaved, int maxCheatDistance)
     {
-        var (walls, startPosition, endPosition) = ParseInput(input);
+        var (walls, startPosition, endPosition, width, height) = ParseInput(input);
         var distanceFromEndByPosition = GetDistancesFromEnd(endPosition, startPosition, walls);
 
         var validCheatsCount = 0;
-        foreach (var (position, positionDistanceFromEnd) in distanceFromEndByPosition)
+        foreach (var (position, positionDistanceFromEnd) in distanceFromEndByPosition.Reverse())
         {
-            foreach (var direction in Directions)
+            var minX = Math.Max(0, position.X - maxCheatDistance);
+            var maxX = Math.Min(width - 1, position.X + maxCheatDistance);
+
+            for (var xIndex = 0; xIndex <= maxX - minX; ++xIndex)
             {
-                if (!walls.Contains(position + direction))
-                {
-                    continue;
-                }
+                var x = minX + xIndex;
+                var xDistance = Math.Abs(x - position.X);
+                var yMaxDistance = maxCheatDistance - xDistance;
 
-                var cheatToPosition = position + direction + direction;
+                var minY = Math.Max(0, position.Y - yMaxDistance);
+                var maxY = Math.Min(height - 1, position.Y + yMaxDistance);
 
-                if (!distanceFromEndByPosition.TryGetValue(cheatToPosition, out var cheatPositionDistanceFromEnd))
+                for (var yIndex = 0; yIndex <= maxY - minY; yIndex++)
                 {
-                    continue;
-                }
+                    var y = minY + yIndex;
+                    var yDistance = Math.Abs(y - position.Y);
 
-                var distanceSaved = positionDistanceFromEnd - (cheatPositionDistanceFromEnd + 1);
-                if (cheatLimit <= distanceSaved)
-                {
-                    ++validCheatsCount;
+                    var cheatToPosition = new IntVector2(x, y);
+
+                    if (!distanceFromEndByPosition.TryGetValue(cheatToPosition, out var cheatPositionDistanceFromEnd))
+                    {
+                        continue;
+                    }
+
+                    var distanceToCheatToPosition = xDistance + yDistance;
+                    var distanceSaved = positionDistanceFromEnd -
+                                        (cheatPositionDistanceFromEnd + distanceToCheatToPosition);
+                    if (minimumTimeSaved <= distanceSaved)
+                    {
+                        ++validCheatsCount;
+                    }
                 }
             }
         }
@@ -81,12 +94,15 @@ public static class CheatFinder
         return distanceFromEndByPosition;
     }
 
-    private static (HashSet<IntVector2> walls, IntVector2 startPosition, IntVector2 endPosition) ParseInput(
-        ReadOnlySpan<char> input)
+    private static (HashSet<IntVector2> walls, IntVector2 startPosition, IntVector2 endPosition, int width, int height)
+        ParseInput(
+            ReadOnlySpan<char> input)
     {
         var walls = new HashSet<IntVector2>();
         var startPosition = new IntVector2();
         var endPosition = new IntVector2();
+
+        var width = input.IndexOf("\r\n");
 
         var y = 0;
         foreach (var line in input.EnumerateLines())
@@ -110,6 +126,6 @@ public static class CheatFinder
             ++y;
         }
 
-        return (walls, startPosition, endPosition);
+        return (walls, startPosition, endPosition, width, y);
     }
 }
