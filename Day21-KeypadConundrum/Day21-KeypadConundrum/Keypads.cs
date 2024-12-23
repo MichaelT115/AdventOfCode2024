@@ -1,9 +1,9 @@
 ﻿namespace Day21_KeypadConundrum;
 
-public static class KeypadCommandSequenceFinders
+public static class Keypads
 {
-    public static KeypadCommandSequenceFinder NumericKeypad => new(
-        new Dictionary<char, IntVector2>
+    public static Keypad BuildNumericKeypad(Keypad? controller = null)
+        => new(controller, new Dictionary<char, IntVector2>
         {
             { '7', new IntVector2(0, 0) },
             { '8', new IntVector2(1, 0) },
@@ -18,8 +18,8 @@ public static class KeypadCommandSequenceFinders
             { 'A', new IntVector2(2, 3) },
         });
 
-    public static KeypadCommandSequenceFinder DirectionalKeypad => new(
-        new Dictionary<char, IntVector2>
+    public static Keypad BuildDirectionalKeypad(Keypad? controller = null)
+        => new(controller, new Dictionary<char, IntVector2>
         {
             { '^', new IntVector2(1, 0) },
             { 'A', new IntVector2(2, 0) },

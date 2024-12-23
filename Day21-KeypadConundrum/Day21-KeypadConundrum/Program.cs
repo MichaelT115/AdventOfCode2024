@@ -1,59 +1,58 @@
-﻿using Day21_KeypadConundrum;
+﻿using System.Diagnostics;
+using Day21_KeypadConundrum;
 
 using var streamReader = new StreamReader(args[0]);
 
 var input = streamReader.ReadToEnd().AsSpan();
 
 // Part 1
-// {
-//     var commandSequenceFinder =
-//         new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-//             new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-//                 KeypadCommandSequenceFinders.NumericKeypad)
-//         );
-//
-//
-//     var complexitySum = 0;
-//     foreach (var line in input.EnumerateLines())
-//     {
-//         var sequences = commandSequenceFinder.GetCommandSequences(line.ToString()).ToArray();
-//
-//         var numericPortionOfInput = int.Parse(line[..^1]);
-//         var sequenceLength = sequences.Min(sequence => sequence.Count);
-//         var complexity = sequenceLength * numericPortionOfInput;
-//
-//         Console.WriteLine($"{line}: {complexity}");
-//
-//         complexitySum += complexity;
-//     }
-//
-//     Console.WriteLine($"Result: {complexitySum}");
-// }
-
-
-// Part 2
 {
-    KeypadCommandSequenceFinderBase commandSequenceFinder = KeypadCommandSequenceFinders.NumericKeypad;
-    for (var i = 0; i < 25; i++)
+    var stopwatch = new Stopwatch();
+    stopwatch.Start();
+
+    var commandSequenceFinder = Keypads.BuildDirectionalKeypad();
+    for (var i = 0; i < 1; i++)
     {
-        commandSequenceFinder =
-            new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-                commandSequenceFinder);
+        commandSequenceFinder = Keypads.BuildDirectionalKeypad(commandSequenceFinder);
     }
 
-    var complexitySum = 0;
+    commandSequenceFinder = Keypads.BuildNumericKeypad(commandSequenceFinder);
+
+    var complexitySum = 0L;
     foreach (var line in input.EnumerateLines())
     {
-        var sequences = commandSequenceFinder.GetCommandSequences(line.ToString()).ToArray();
+        var complexity = commandSequenceFinder.GetComplexity(line.ToString());
 
-        var numericPortionOfInput = int.Parse(line[..^1]);
-        var sequenceLength = sequences.Min(sequence => sequence.Count);
-        var complexity = sequenceLength * numericPortionOfInput;
-
-        Console.WriteLine($"{line}: {complexity}");
+        // Console.WriteLine($"{line}: {complexity}");
 
         complexitySum += complexity;
     }
 
-    Console.WriteLine($"Result: {complexitySum}");
+    Console.WriteLine($"Result: {complexitySum} (Time = {stopwatch.ElapsedMilliseconds}ms)\n");
+}
+
+// Part 2
+{
+    var stopwatch = new Stopwatch();
+    stopwatch.Start();
+
+    var commandSequenceFinder = Keypads.BuildDirectionalKeypad();
+    for (var i = 0; i < 24; ++i)
+    {
+        commandSequenceFinder = Keypads.BuildDirectionalKeypad(commandSequenceFinder);
+    }
+
+    commandSequenceFinder = Keypads.BuildNumericKeypad(commandSequenceFinder);
+
+    var complexitySum = 0L;
+    foreach (var line in input.EnumerateLines())
+    {
+        var complexity = commandSequenceFinder.GetComplexity(line.ToString());
+
+        // Console.WriteLine($"{line}: {complexity}");
+
+        complexitySum += complexity;
+    }
+
+    Console.WriteLine($"Result (Part 2): {complexitySum} (Time = {stopwatch.ElapsedMilliseconds}ms)\n");
 }

@@ -1,14 +1,24 @@
-﻿namespace Day21_KeypadConundrum;
+﻿using System.Text.RegularExpressions;
 
-public sealed class KeypadCommandSequenceFinder : KeypadCommandSequenceFinderBase
+namespace Day21_KeypadConundrum;
+
+public sealed partial class Keypad
 {
+    private readonly Keypad? _controller;
+
     private readonly Dictionary<char, IntVector2> _buttonToPosition;
 
     private readonly Dictionary<string, List<List<char>>> _inputToCommands =
         new();
 
-    public KeypadCommandSequenceFinder(Dictionary<char, IntVector2> buttonToPosition)
+    private readonly Dictionary<string, long> _inputsToMinimumCommandLengths =
+        new();
+
+    public Keypad(Keypad? controller,
+        Dictionary<char, IntVector2> buttonToPosition)
     {
+        _controller = controller;
+
         _buttonToPosition = buttonToPosition;
 
         foreach (var startButton in _buttonToPosition.Keys)
@@ -20,7 +30,53 @@ public sealed class KeypadCommandSequenceFinder : KeypadCommandSequenceFinderBas
         }
     }
 
-    public override List<List<char>> GetCommandSequences(string input)
+    public long GetComplexity(string input)
+        => GetMinimumCommandLength(input) * int.Parse(input[..^1]);
+
+    private long GetMinimumCommandLength(string input)
+    {
+        if (_inputsToMinimumCommandLengths.TryGetValue(input, out var length))
+        {
+            return length;
+        }
+
+        length = 0L;
+
+        var previousCharacter = 'A';
+        var sections = SectionSplittingRegex().Split(input);
+        foreach (var section in sections)
+        {
+            if (section.Length == 0)
+            {
+                continue;
+            }
+
+            var fullSection = $"{previousCharacter}{section}";
+
+            if (_inputsToMinimumCommandLengths.TryGetValue(fullSection, out var sectionLength))
+            {
+                length += sectionLength;
+                continue;
+            }
+
+            var commandSequences = GetCommandSequences(fullSection);
+            var sectionsLengths = _controller != null
+                ? commandSequences.Select(sequence =>
+                    _controller.GetMinimumCommandLength(new string(sequence.ToArray()))).ToArray()
+                : commandSequences.Select(sequence => (long)sequence.Count).ToArray();
+
+
+            var shortestSectionLength = sectionsLengths.Length != 0 ? sectionsLengths.Min() : 0;
+
+            _inputsToMinimumCommandLengths.Add(fullSection, shortestSectionLength);
+            length += shortestSectionLength;
+            previousCharacter = fullSection[^1];
+        }
+
+        return length;
+    }
+
+    public List<List<char>> GetCommandSequences(string input)
     {
         if (input.Length < 2)
         {
@@ -122,4 +178,8 @@ public sealed class KeypadCommandSequenceFinder : KeypadCommandSequenceFinderBas
 
         return sequences;
     }
+
+    // Normal string.split() does not include the delimiter.
+    [GeneratedRegex("(?<=A)")]
+    private static partial Regex SectionSplittingRegex();
 }

@@ -4,8 +4,8 @@ using NUnit.Framework;
 namespace Day21_KeypadConundrum.Tests;
 
 [TestFixture]
-[TestOf(typeof(KeypadCommandSequenceFinder))]
-public class KeypadCommandSequenceFindersTests
+[TestOf(typeof(Keypad))]
+public class KeypadsTests
 {
     [TestFixture]
     public class Numeric_Keypad_Commands_Finder
@@ -19,7 +19,7 @@ public class KeypadCommandSequenceFindersTests
             [ValueSource(nameof(NumericKeypadButtons))]
             char targetButton) =>
             Assert.That(
-                KeypadCommandSequenceFinders.NumericKeypad.GetCommandSequences($"{startButton}{targetButton}"),
+                Keypads.BuildNumericKeypad().GetCommandSequences($"{startButton}{targetButton}"),
                 Is.Not.Empty);
 
         [Test]
@@ -39,7 +39,7 @@ public class KeypadCommandSequenceFindersTests
             int expectedLeftCommandsCount)
         {
             var sequences =
-                KeypadCommandSequenceFinders.NumericKeypad.GetCommandSequences(input);
+                Keypads.BuildNumericKeypad().GetCommandSequences(input);
 
             foreach (var sequence in sequences.Select(sequence => sequence.ToArray()))
             {
@@ -55,7 +55,7 @@ public class KeypadCommandSequenceFindersTests
         public void Never_Returns_Path_Through_Position_Without_Button(string input,
             params object[] invalidCommandSequences) =>
             Assert.That(
-                KeypadCommandSequenceFinders.NumericKeypad.GetCommandSequences(input),
+                Keypads.BuildNumericKeypad().GetCommandSequences(input),
                 Is.Not.AnyOf(invalidCommandSequences));
     }
 
@@ -71,7 +71,7 @@ public class KeypadCommandSequenceFindersTests
             [ValueSource(nameof(DirectionalKeypadButtons))]
             char targetButton) =>
             Assert.That(
-                KeypadCommandSequenceFinders.DirectionalKeypad.GetCommandSequences($"{startButton}{targetButton}")
+                Keypads.BuildDirectionalKeypad().GetCommandSequences($"{startButton}{targetButton}")
                     .ToString(), Is.Not.Empty);
 
         [Test]
@@ -85,7 +85,7 @@ public class KeypadCommandSequenceFindersTests
             int expectedLeftCommandsCount)
         {
             var sequences =
-                KeypadCommandSequenceFinders.DirectionalKeypad.GetCommandSequences(input);
+                Keypads.BuildDirectionalKeypad().GetCommandSequences(input);
 
             foreach (var sequence in sequences.Select(sequence => sequence.ToArray()))
             {
@@ -100,38 +100,20 @@ public class KeypadCommandSequenceFindersTests
         [TestCase("A^", '<', "<<VA")]
         public void Never_Returns_Path_Through_Position_Without_Button(string input,
             params object[] invalidCommandSequences) =>
-            Assert.That(KeypadCommandSequenceFinders.DirectionalKeypad
+            Assert.That(Keypads.BuildDirectionalKeypad()
                 .GetCommandSequences(input)
                 .ToString(), Is.Not.AnyOf(invalidCommandSequences));
     }
-
-    [TestFixture]
-    public class Nested_Keypad_Command_Sequence_Finder
-    {
-        private static readonly char[] NumericKeypadButtons = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A'];
-
-        [Test]
-        public void Returns_Command_Sequence_From_Any_Button_To_Any_Button(
-            [ValueSource(nameof(NumericKeypadButtons))]
-            char targetButton) =>
-            Assert.That(
-                new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-                        KeypadCommandSequenceFinders.NumericKeypad)
-                    .GetCommandSequences($"{targetButton}")
-                    .ToString(),
-                Is.Not.Empty);
-
-    }
+    
 
     [Test]
     [TestCase("029A", 28 * 29)]
     public void Test_Examples_2(string input, int expectedComplexity)
     {
         var commandSequenceFinder =
-            new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-                KeypadCommandSequenceFinders.NumericKeypad);
+            Keypads.BuildNumericKeypad(Keypads.BuildDirectionalKeypad());
 
-        Assert.That(commandSequenceFinder.GetComplexity($"A{input}"), Is.EqualTo(expectedComplexity));
+        Assert.That(commandSequenceFinder.GetComplexity(input), Is.EqualTo(expectedComplexity));
     }
     
 
@@ -145,11 +127,10 @@ public class KeypadCommandSequenceFindersTests
     public void Test_Examples(string input, int expectedComplexity)
     {
         var commandSequenceFinder =
-            new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-                new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-                    KeypadCommandSequenceFinders.NumericKeypad)
-            );
+            Keypads.BuildNumericKeypad(
+                Keypads.BuildDirectionalKeypad(
+                    Keypads.BuildDirectionalKeypad()));
 
-        Assert.That(commandSequenceFinder.GetComplexity($"A{input}"), Is.EqualTo(expectedComplexity));
+        Assert.That(commandSequenceFinder.GetComplexity(input), Is.EqualTo(expectedComplexity));
     }
 }
