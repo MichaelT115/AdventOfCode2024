@@ -4,7 +4,7 @@ public sealed class KeypadCommandSequenceFinder : KeypadCommandSequenceFinderBas
 {
     private readonly Dictionary<char, IntVector2> _buttonToPosition;
 
-    private readonly Dictionary<(char currentButton, char targetButton), List<List<char>>> _buttonsToCommand =
+    private readonly Dictionary<string, List<List<char>>> _inputToCommands =
         new();
 
     public KeypadCommandSequenceFinder(Dictionary<char, IntVector2> buttonToPosition)
@@ -20,29 +20,28 @@ public sealed class KeypadCommandSequenceFinder : KeypadCommandSequenceFinderBas
         }
     }
 
-    public KeypadCommandSequenceFinder(KeypadCommandSequenceFinder keypadCommandSequenceFinder)
+    public override List<List<char>> GetCommandSequences(string input)
     {
-        _buttonToPosition = keypadCommandSequenceFinder._buttonToPosition;
-        _buttonsToCommand = keypadCommandSequenceFinder._buttonsToCommand;
-    }
-
-    public override IEnumerable<IEnumerable<char>> GetCommandSequences(char[] input)
-    {
-        IEnumerable<IEnumerable<char>> possibleSequences = _buttonsToCommand[('A', input[0])];
-        var currentButton = input[0];
-
-        foreach (var button in input[1..])
+        if (input.Length < 2)
         {
-            var sequencesToNextButton = _buttonsToCommand[(currentButton, button)];
-
-            possibleSequences = from possibleSequence in possibleSequences
-                from sequenceToNextButton in sequencesToNextButton
-                select possibleSequence.Concat(sequenceToNextButton);
-            
-            currentButton = button;
+            return [];
         }
 
-        return possibleSequences;
+        if (_inputToCommands.TryGetValue(input, out var memoizedSequence))
+        {
+            return memoizedSequence;
+        }
+
+        var sequencesToFirstButton = _inputToCommands[input[..2]];
+        var sequencesToLastButton = GetCommandSequences(input[1..]);
+
+        var sequences = (from sequenceToFirstButton in sequencesToFirstButton
+            from sequenceToLastButton in sequencesToLastButton
+            select sequenceToFirstButton.Concat(sequenceToLastButton).ToList()).ToList();
+
+        _inputToCommands.Add(input, sequences);
+
+        return sequences;
     }
 
     private void FindCommandSequences(char currentButton, char targetButton)
@@ -58,7 +57,7 @@ public sealed class KeypadCommandSequenceFinder : KeypadCommandSequenceFinderBas
             sequences.Add(validSequence);
         }
 
-        _buttonsToCommand.Add((currentButton, targetButton), sequences);
+        _inputToCommands.Add(new string([currentButton, targetButton]), sequences);
     }
 
     private List<List<char>> GetValidSequences(IntVector2 currentPosition, IntVector2 targetVector)
@@ -77,42 +76,50 @@ public sealed class KeypadCommandSequenceFinder : KeypadCommandSequenceFinderBas
 
         if (currentPosition.X < targetVector.X)
         {
-            var sequencesFromPosition = GetValidSequences(currentPosition with { X = currentPosition.X + 1 }, targetVector);
+            var sequencesFromPosition =
+                GetValidSequences(currentPosition with { X = currentPosition.X + 1 }, targetVector);
             foreach (var sequence in sequencesFromPosition)
             {
                 sequence.Add('>');
             }
+
             sequences.AddRange(sequencesFromPosition);
         }
         else if (targetVector.X < currentPosition.X)
         {
-            var sequencesFromPosition = GetValidSequences(currentPosition with { X = currentPosition.X - 1 }, targetVector);
+            var sequencesFromPosition =
+                GetValidSequences(currentPosition with { X = currentPosition.X - 1 }, targetVector);
             foreach (var sequence in sequencesFromPosition)
             {
                 sequence.Add('<');
             }
+
             sequences.AddRange(sequencesFromPosition);
         }
-        
+
         if (currentPosition.Y < targetVector.Y)
         {
-            var sequencesFromPosition = GetValidSequences(currentPosition with { Y = currentPosition.Y + 1 }, targetVector);
+            var sequencesFromPosition =
+                GetValidSequences(currentPosition with { Y = currentPosition.Y + 1 }, targetVector);
             foreach (var sequence in sequencesFromPosition)
             {
-                sequence.Add('V');
+                sequence.Add('v');
             }
+
             sequences.AddRange(sequencesFromPosition);
         }
-        else if (targetVector.Y< currentPosition.Y)
+        else if (targetVector.Y < currentPosition.Y)
         {
-            var sequencesFromPosition = GetValidSequences(currentPosition with { Y = currentPosition.Y - 1 }, targetVector);
+            var sequencesFromPosition =
+                GetValidSequences(currentPosition with { Y = currentPosition.Y - 1 }, targetVector);
             foreach (var sequence in sequencesFromPosition)
             {
                 sequence.Add('^');
             }
+
             sequences.AddRange(sequencesFromPosition);
         }
 
         return sequences;
-    } 
+    }
 }

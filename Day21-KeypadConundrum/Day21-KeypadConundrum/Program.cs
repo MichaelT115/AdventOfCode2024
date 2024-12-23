@@ -4,25 +4,56 @@ using var streamReader = new StreamReader(args[0]);
 
 var input = streamReader.ReadToEnd().AsSpan();
 
-var commandSequenceFinder =
-    new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-        new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
-            KeypadCommandSequenceFinders.NumericKeypad)
-    );
+// Part 1
+// {
+//     var commandSequenceFinder =
+//         new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
+//             new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
+//                 KeypadCommandSequenceFinders.NumericKeypad)
+//         );
+//
+//
+//     var complexitySum = 0;
+//     foreach (var line in input.EnumerateLines())
+//     {
+//         var sequences = commandSequenceFinder.GetCommandSequences(line.ToString()).ToArray();
+//
+//         var numericPortionOfInput = int.Parse(line[..^1]);
+//         var sequenceLength = sequences.Min(sequence => sequence.Count);
+//         var complexity = sequenceLength * numericPortionOfInput;
+//
+//         Console.WriteLine($"{line}: {complexity}");
+//
+//         complexitySum += complexity;
+//     }
+//
+//     Console.WriteLine($"Result: {complexitySum}");
+// }
 
 
-var complexitySum = 0;
-foreach (var line in input.EnumerateLines())
+// Part 2
 {
-    var sequences = commandSequenceFinder.GetCommandSequences(line.ToArray()).ToArray();
+    KeypadCommandSequenceFinderBase commandSequenceFinder = KeypadCommandSequenceFinders.NumericKeypad;
+    for (var i = 0; i < 25; i++)
+    {
+        commandSequenceFinder =
+            new NestedKeypadCommandSequenceFinder(KeypadCommandSequenceFinders.DirectionalKeypad,
+                commandSequenceFinder);
+    }
 
-    var numericPortionOfInput = int.Parse(line[..^1]);
-    var sequenceLength = sequences.Min(sequence => sequence.Count());
-    var complexity = sequenceLength * numericPortionOfInput;
+    var complexitySum = 0;
+    foreach (var line in input.EnumerateLines())
+    {
+        var sequences = commandSequenceFinder.GetCommandSequences(line.ToString()).ToArray();
 
-    Console.WriteLine($"{line}: {complexity}");
+        var numericPortionOfInput = int.Parse(line[..^1]);
+        var sequenceLength = sequences.Min(sequence => sequence.Count);
+        var complexity = sequenceLength * numericPortionOfInput;
 
-    complexitySum += complexity;
+        Console.WriteLine($"{line}: {complexity}");
+
+        complexitySum += complexity;
+    }
+
+    Console.WriteLine($"Result: {complexitySum}");
 }
-
-Console.WriteLine($"Result: {complexitySum}");
