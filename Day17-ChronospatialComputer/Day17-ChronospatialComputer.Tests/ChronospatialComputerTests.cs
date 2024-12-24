@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Day17_ChronospatialComputer.Tests;
 
@@ -273,12 +274,12 @@ public class ChronospatialComputerTests
 
     private static object[] _exampleTestCases =
     [
-        new object[] { (0, 0, 9), new byte[] { 2, 6 }, (0, 1, 9), System.Array.Empty<int>() },
+        new object[] { (0, 0, 9), new byte[] { 2, 6 }, (0, 1, 9), Array.Empty<int>() },
         new object[] { (10, 0, 0), new byte[] { 5, 0, 5, 1, 5, 4 }, (10, 0, 0), new[] { 0, 1, 2 } },
         new object[]
             { (2024, 0, 0), new byte[] { 0, 1, 5, 4, 3, 0 }, (0, 0, 0), new[] { 4, 2, 5, 6, 7, 7, 7, 7, 3, 1, 0 } },
-        new object[] { (0, 29, 0), new byte[] { 1, 7 }, (0, 26, 0), System.Array.Empty<int>() },
-        new object[] { (0, 2024, 43690), new byte[] { 4, 0 }, (0, 44354, 43690), System.Array.Empty<int>() },
+        new object[] { (0, 29, 0), new byte[] { 1, 7 }, (0, 26, 0), Array.Empty<int>() },
+        new object[] { (0, 2024, 43690), new byte[] { 4, 0 }, (0, 44354, 43690), Array.Empty<int>() },
         new object[]
         {
             (46337277, 0, 0), new byte[] { 2, 4, 1, 1, 7, 5, 4, 4, 1, 4, 0, 3, 5, 5, 3, 0 }, (0, 7, 0),
