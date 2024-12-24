@@ -4,30 +4,30 @@ var input = streamReader.ReadToEnd().AsSpan();
 
 // Part 1
 {
-    var computerToConnectingComputers = new Dictionary<string, HashSet<string>>();
+    var connectionsByComputer = new Dictionary<string, HashSet<string>>();
     foreach (var line in input.EnumerateLines())
     {
         var computerA = line[..2].ToString();
         var computerB = line[3..].ToString();
 
-        if (!computerToConnectingComputers.TryAdd(computerA, [computerB]))
+        if (!connectionsByComputer.TryAdd(computerA, [computerB]))
         {
-            computerToConnectingComputers[computerA].Add(computerB);
+            connectionsByComputer[computerA].Add(computerB);
         }
 
-        if (!computerToConnectingComputers.TryAdd(computerB, [computerA]))
+        if (!connectionsByComputer.TryAdd(computerB, [computerA]))
         {
-            computerToConnectingComputers[computerB].Add(computerA);
+            connectionsByComputer[computerB].Add(computerA);
         }
     }
 
     var foundConnections = new HashSet<string>();
-    foreach (var (computer, connectingComputersSet) in computerToConnectingComputers.Where(computerAndConnections =>
+    foreach (var (computer, connectingComputersSet) in connectionsByComputer.Where(computerAndConnections =>
                  computerAndConnections.Key.StartsWith('t')))
     {
         foreach (var connectingComputer in connectingComputersSet)
         {
-            var overlaps = computerToConnectingComputers[connectingComputer].Intersect(connectingComputersSet);
+            var overlaps = connectionsByComputer[connectingComputer].Intersect(connectingComputersSet);
             var key = overlaps.Select(computerInSet => BuildSetKey(computer, connectingComputer, computerInSet));
             foundConnections.UnionWith(key);
         }
@@ -55,11 +55,22 @@ var input = streamReader.ReadToEnd().AsSpan();
         }
     }
 
+    var biggestGroup = GetHighestSet(computerToConnectingComputers);
+    var biggestGroupKey = BuildSetKey(biggestGroup.ToArray());
+    Console.WriteLine($"Result (Part 2): {biggestGroupKey}");
+}
+
+return;
+
+string BuildSetKey(params string[] computers) => string.Join(',', computers.Order());
+
+HashSet<string> GetHighestSet(Dictionary<string, HashSet<string>> connectionsByComputer)
+{
     var biggestGroupSize = int.MinValue;
     HashSet<string> biggestGroup = [];
-    foreach (var computer in computerToConnectingComputers.Keys)
+    foreach (var computer in connectionsByComputer.Keys)
     {
-        var group = GetHighestSet(computer, computerToConnectingComputers, [], []);
+        var group = GetHighestSetInternal(computer, connectionsByComputer, [], []);
 
         if (biggestGroupSize < group.Count)
         {
@@ -68,16 +79,11 @@ var input = streamReader.ReadToEnd().AsSpan();
         }
     }
 
-    var biggestGroupKey = BuildSetKey(biggestGroup.ToArray());
-
-    Console.WriteLine($"Result (Part 2): {biggestGroupKey}");
+    return biggestGroup;
 }
 
-return;
-
-string BuildSetKey(params string[] computers) => string.Join(',', computers.Order());
-
-HashSet<string> GetHighestSet(string computer, Dictionary<string, HashSet<string>> connectionsByComputer, HashSet<string> set, HashSet<string> visited)
+HashSet<string> GetHighestSetInternal(string computer, Dictionary<string, HashSet<string>> connectionsByComputer,
+    HashSet<string> set, HashSet<string> visited)
 {
     if (!visited.Add(computer))
     {
@@ -92,7 +98,8 @@ HashSet<string> GetHighestSet(string computer, Dictionary<string, HashSet<string
     }
 
     var sets = connectedComputersSet
-        .Select(connectedComputer => GetHighestSet(connectedComputer, connectionsByComputer, [computer, ..set], visited))
+        .Select(connectedComputer =>
+            GetHighestSetInternal(connectedComputer, connectionsByComputer, [computer, ..set], visited))
         .OrderBy(hashSet => hashSet.Count);
 
     return sets.Last();
