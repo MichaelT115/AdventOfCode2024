@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
 
 namespace Day22_MonkeyMarket.Tests;
 
@@ -24,4 +26,28 @@ public class MonkeyMarketPredictorTests
     [TestCase(2024, 2000, 8667524)]
     public void Test_Examples(long input, int count, long expectedNextNumber) =>
         Assert.That(MonkeyMarketPredictor.CalculateSecretNumber(input, count), Is.EqualTo(expectedNextNumber));
+    
+    [Test]
+    [TestCase(123, 9, 6)]
+    public void Part_2_Test_Examples(long input, int count, long expectedBananas)
+    {
+        var sequenceCounts = new Dictionary<(int first, int second, int third, int fourth), long>();
+
+        MonkeyMarketPredictor.FillOutProfitFromCommands(input, count, sequenceCounts);
+        
+        Assert.That(sequenceCounts.Values.Max(), Is.EqualTo(expectedBananas));
+    }
+    
+    [Test]
+    public void Part_2_Test_Full_Example()
+    {
+        var sequenceCounts = new Dictionary<(int first, int second, int third, int fourth), long>();
+
+        MonkeyMarketPredictor.FillOutProfitFromCommands(1, 2000, sequenceCounts);
+        MonkeyMarketPredictor.FillOutProfitFromCommands(2, 2000, sequenceCounts);
+        MonkeyMarketPredictor.FillOutProfitFromCommands(3, 2000, sequenceCounts);
+        MonkeyMarketPredictor.FillOutProfitFromCommands(2024, 2000, sequenceCounts);
+        
+        Assert.That(sequenceCounts.Values.Max(), Is.EqualTo(23));
+    }
 }

@@ -15,8 +15,6 @@ Console.WriteLine($"Result: {sum}");
 
 var sequenceCounts = new Dictionary<(int first, int second, int third, int fourth), long>();
 
-//FillOutProfitFromCommands(123, 9, sequenceCount);
-
 foreach (var line in input.EnumerateLines())
 {
     MonkeyMarketPredictor.FillOutProfitFromCommands(long.Parse(line), 2000, sequenceCounts);

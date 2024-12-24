@@ -66,7 +66,6 @@ public static class MonkeyMarketPredictor
         {
             dictionary[key] += previousPrice;
         }
-
         doneSequences.Add(key);
 
         for (var i = 5; i <= count; ++i)
