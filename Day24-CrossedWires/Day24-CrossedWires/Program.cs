@@ -105,12 +105,12 @@ using Day24_CrossedWires;
     var xOutputAsBinary = Convert.ToString(xOutput, 2);
     var yOutputAsBinary = Convert.ToString(yOutput, 2);
     var zOutputAsBinary = Convert.ToString(zOutput, 2);
-    var expectedOutputAsBinary = Convert.ToString(xOutput + yOutput, 2);
+    var expectedOutputAsBinary = Convert.ToString(expectedZ, 2);
     
     Console.WriteLine($"X:        0{xOutputAsBinary} ({xOutput})");
     Console.WriteLine($"Y:        0{yOutputAsBinary} ({yOutput})");
     Console.WriteLine($"z:        {zOutputAsBinary} ({zOutput})");
-    Console.WriteLine($"Expected: {expectedOutputAsBinary} ({xOutput + yOutput})");
+    Console.WriteLine($"Expected: {expectedOutputAsBinary} ({expectedZ})");
 
     for (var i = expectedOutputAsBinary.Length - 1; i >= 0; i--)
     {
